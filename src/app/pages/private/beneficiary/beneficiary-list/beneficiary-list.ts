@@ -11,6 +11,9 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { PaginatorModule } from 'primeng/paginator';
 import { BreadcrumbModule } from 'primeng/breadcrumb';
 import { InputTextModule } from 'primeng/inputtext';
+import { TooltipModule } from 'primeng/tooltip';
+import { Router, ActivatedRoute  } from '@angular/router';
+import { RouterModule } from '@angular/router'; 
 
 import { MessageService, ConfirmationService } from 'primeng/api';
 
@@ -48,11 +51,17 @@ interface Beneficiary {
     ConfirmDialogModule,
     PaginatorModule,
     BreadcrumbModule,
-    InputTextModule
+    InputTextModule,
+    TooltipModule,
+    RouterModule
+    
   ],
   providers: [MessageService, ConfirmationService]
 })
 export class BeneficiaryList implements OnInit {
+
+   bid!: string;
+  mode: 'edit' | 'migrate' | 'create' | 'archive' | undefined;
   searchForm!: FormGroup;
   states: Location[] = [];
   counties: Location[] = [];
@@ -67,15 +76,19 @@ export class BeneficiaryList implements OnInit {
   constructor(
     private fb: FormBuilder,
     private messageService: MessageService,
-    private confirmationService: ConfirmationService
+    private confirmationService: ConfirmationService,
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit() {
+    this.bid = this.route.snapshot.paramMap.get('bid')!;
+    this.mode = this.route.snapshot.queryParamMap.get('mode') as any;
     this.initForm();
     this.loadLocations();
     this.loadBeneficiaries();
-    this.breadcrumbHome = { icon: 'pi pi-home', routerLink: '/' };
-    this.breadcrumbItems = [{ label: 'Beneficiaries' }];
+    this.breadcrumbHome = { icon: 'fas fa-home', routerLink: '/private' };
+    this.breadcrumbItems = [{ label: 'Beneficiary List' }];
   }
 
   initForm() {
@@ -187,25 +200,41 @@ export class BeneficiaryList implements OnInit {
     this.searchForm.reset();
   }
 
-  editBeneficiary(beneficiary: Beneficiary) {
-    this.messageService.add({
-      severity: 'info',
-      summary: 'Edit',
-      detail: `Editing beneficiary ${beneficiary.firstName} ${beneficiary.lastName}`
-    });
+editBeneficiary(b: Beneficiary) {
+  const bid = b?.householdNumber;
+
+  if (!bid) {
+    console.error('Edit clicked, but b.householdNumber is missing:', b);
+    return;
   }
+
+  this.router.navigate(['/private/beneficiary/edit', String(bid)]);
+
+}
+
+  beneficiaryDetails(b: Beneficiary){
+    const bid = b?.householdNumber;
+
+  if (!bid) {
+    console.error('Edit clicked, but b.householdNumber is missing:', b);
+    return;
+  }
+
+  this.router.navigate(['/private/beneficiary/details', String(bid)]);
+  }
+
 
   deleteBeneficiary(beneficiary: Beneficiary) {
     this.confirmationService.confirm({
-      message: `Are you sure you want to delete ${beneficiary.firstName} ${beneficiary.lastName}?`,
+      message: `Are you sure you want to archive ${beneficiary.firstName} ${beneficiary.lastName}?`,
       header: 'Confirm',
-      icon: 'pi pi-exclamation-triangle',
+      icon: 'fas fa-warning',
       accept: () => {
         this.beneficiaries = this.beneficiaries.filter(b => b.householdNumber !== beneficiary.householdNumber);
         this.messageService.add({
           severity: 'success',
-          summary: 'Deleted',
-          detail: 'Beneficiary deleted successfully'
+          summary: 'Archived',
+          detail: 'Beneficiary archived successfully'
         });
       }
     });

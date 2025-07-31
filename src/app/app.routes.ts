@@ -32,7 +32,6 @@ import { SupplementaryPayroll } from './pages/private/payment/supplementary-payr
 import { MobileWalletPayroll } from './pages/private/payment/mobile-wallet-payroll/mobile-wallet-payroll';
 import { PayrollReconcile } from './pages/private/payment/payroll-reconcile/payroll-reconcile';
 import { BeneficiarySummary } from './pages/private/report/beneficiary-summary/beneficiary-summary';
-import { BeneficiaryDetails } from './pages/private/report/beneficiary-details/beneficiary-details';
 import { PaymentSummary } from './pages/private/report/payment-summary/payment-summary';
 import { PaymentDetails } from './pages/private/report/payment-details/payment-details';
 import { BeneficiaryPaymentHistory } from './pages/private/report/beneficiary-payment-history/beneficiary-payment-history';
@@ -57,6 +56,8 @@ import { CyclewisePrint } from './pages/private/invoice/cyclewise-print/cyclewis
 import { UserList } from './pages/private/users/user-list/user-list';
 import { Register } from './pages/private/users/register/register';
 import { RoleManagement } from './pages/private/users/role-management/role-management';
+import { BeneficiaryDetails } from './pages/private/beneficiary/beneficiary-details/beneficiary-details';
+import { ReportBeneficiaryDetails } from './pages/private/report/report-beneficiary-details/report-beneficiary-details';
 
 export const routes: Routes = [
   {
@@ -102,6 +103,7 @@ export const routes: Routes = [
           { path: 'work-progress', component: WorkProgress },
           { path: 'lipw-export', component: LipwExport },
           { path: 'edit/:bid', component: BeneficiaryManage },
+          { path: 'details/:bid', component: BeneficiaryDetails },
           { path: '', pathMatch: 'full', redirectTo: 'list' },
         ],
       },
@@ -122,7 +124,7 @@ export const routes: Routes = [
         path: 'report',
         children: [
           { path: 'beneficiary-summary', component: BeneficiarySummary },
-          { path: 'beneficiary-details', component: BeneficiaryDetails },
+          { path: 'report-beneficiary-details', component: ReportBeneficiaryDetails },
           { path: 'payment-summary', component: PaymentSummary },
           { path: 'payment-details', component: PaymentDetails },
           { path: 'beneficiary-payment-history', component: BeneficiaryPaymentHistory },
