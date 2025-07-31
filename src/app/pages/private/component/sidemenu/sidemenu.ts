@@ -165,7 +165,7 @@ export class Sidemenu implements OnInit {
               {
                 label: 'Details',
                 icon: 'fas fa-list',
-                routerLink: 'report/beneficiary-details',
+                routerLink: 'report/report-beneficiary-details',
               },
             ],
           },

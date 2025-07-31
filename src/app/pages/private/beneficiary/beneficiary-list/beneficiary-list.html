@@ -1,9 +1,9 @@
 <div class="wrapper-scroller p-3">
-    <p-toast></p-toast>
+  <p-toast></p-toast>
   <div class="breadcrumb-wrapper mb-3">
     <p-breadcrumb [model]="breadcrumbItems" [home]="breadcrumbHome" class="max-w-full">
     </p-breadcrumb>
-    
+
   </div>
 
   <div class="card p-3 mb-3">
@@ -57,7 +57,7 @@
   </div>
 
   <div class="card mb-3">
-    
+
     <p-table [value]="paginatedBeneficiaries" [scrollable]="true" scrollHeight="55vh"
       [tableStyle]="{ 'min-width': '100%' }">
       <ng-template pTemplate="header">
@@ -86,16 +86,29 @@
           <td>{{ b.payam }}</td>
           <td>{{ b.boma }}</td>
           <td class="text-center">
-            <button pButton icon="fas fa-pencil" class="p-button-sm p-button-rounded p-button-info me-2"
-              (click)="editBeneficiary(b)" pTooltip="Edit"></button>
-            <button pButton icon="fas fa-trash" class="p-button-sm p-button-rounded p-button-danger"
-              (click)="deleteBeneficiary(b)" pTooltip="Delete"></button>
+            <button pButton type="button" icon="fas fa-eye" class="p-button-sm p-button-rounded p-button-info me-2"
+              pTooltip="Details" tooltipPosition="top" appendTo="body"
+              (click)="beneficiaryDetails(b)">
+            </button>
+            <button pButton type="button" icon="fas fa-pencil" class="p-button-sm p-button-rounded p-button-secondary me-2"
+              pTooltip="Edit" tooltipPosition="top" appendTo="body"
+              (click)="editBeneficiary(b)">
+            </button>
+            <button pButton type="button" icon="fas fa-share" class="p-button-sm p-button-rounded p-button-warn me-2"
+              pTooltip="Migrate" tooltipPosition="top" appendTo="body" (click)="editBeneficiary(b)">
+            </button>
+
+            <button pButton type="button" icon="fas fa-archive" class="p-button-sm p-button-rounded p-button-danger"
+              pTooltip="Archive" tooltipPosition="top" appendTo="body" (click)="deleteBeneficiary(b)">
+            </button>
+
+
           </td>
         </tr>
       </ng-template>
       <ng-template pTemplate="emptymessage">
         <tr>
-          <td colspan="10" class="text-center">No beneficiaries found.</td>
+          <td colspan="10" class="text-center text-danger"><b>**No beneficiaries found**</b></td>
         </tr>
       </ng-template>
     </p-table>
@@ -105,11 +118,7 @@
     [rowsPerPageOptions]="[10, 25, 50]" (onPageChange)="onPageChange($event)" [dropdownAppendTo]="'body'"
     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"></p-paginator>
 
-<p-toast
-  position="top-right"
-  [autoZIndex]="true"
-  [baseZIndex]="100000"
-  appendTo="body">
-</p-toast>
+  <p-toast position="top-right" [autoZIndex]="true" [baseZIndex]="10000" appendTo="body">
+  </p-toast>
   <p-confirmDialog [style]="{ width: '450px' }"></p-confirmDialog>
 </div>
