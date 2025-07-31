@@ -1,33 +1,23 @@
 <!-- wage-request.component.html -->
 
 <!-- “Breadcrumb” line (simple text version) -->
-<div class="mb-3">
-  <span class="me-2">You are here !</span>
-  <a routerLink="/" class="text-decoration-none">Dashboard</a>
-  <span class="mx-2">/</span>
-  <strong>Apply for Wages Payment</strong>
+<div class="breadcrumb-wrapper mb-3">
+  <p-breadcrumb [model]="breadCrumbItems" [home]="breadcrumbHome" class="max-w-full">
+  </p-breadcrumb>
+
 </div>
 
 <!-- Outer panel -->
 <div class="card shadow-sm">
-  <div class="card-header text-center position-relative">
+  <!--<div class="card-header text-center position-relative">
     <div class="fw-semibold">Apply for Wages Payment</div>
-
-    <!-- Look Up -->
-    <button
-      type="button"
-      class="btn btn-primary btn-sm position-absolute"
-      style="right: 1rem; top: 0.5rem"
-      (click)="onLookup()"
-    >
-      Look Up
-    </button>
+  </div>-->
+<br>
+  <div class="d-flex align-items-center justify-content-center gap-2 mb-3">
+    <span class="fw-semibold">Search :</span>
+    <p-button label="Look Up" icon="fas fa-search" severity="primary" (click)="onLookup()"></p-button>
   </div>
-
-  <div class="card-body">
-    <!-- Section title -->
-    <div class="text-center mb-3 fw-semibold">Search</div>
-
+  <div>
     <!-- Reactive form -->
     <form [formGroup]="form" class="container-fluid">
       <div class="row g-3 justify-content-center">
@@ -130,8 +120,8 @@
 
       <!-- Actions -->
       <div class="d-flex justify-content-center gap-2 mt-4">
-        <button type="button" class="btn btn-primary" (click)="onSearch()">Search</button>
-        <button type="button" class="btn btn-secondary" (click)="onCancel()">Cancel</button>
+        <p-button label = "Search" icon = "fas fa-search" severity="primary" (onClick)="onSearch()"></p-button>
+        <p-button label = "Cancel" icon = "fas fa-cancel" severity="secondary" (onClick)="onCancel()"></p-button>
       </div>
 
       <!-- Status line -->

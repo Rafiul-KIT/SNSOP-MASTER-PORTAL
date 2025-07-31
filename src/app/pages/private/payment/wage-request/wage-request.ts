@@ -4,13 +4,16 @@ import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import {Breadcrumb} from 'primeng/breadcrumb';
+import { BreadcrumbModule } from 'primeng/breadcrumb';
+import {Button} from 'primeng/button';
 
 type SupportType = 'LIPW' | 'DIS';
 
 @Component({
   selector: 'wage-request',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, Breadcrumb, Button],
   templateUrl: './wage-request.html',
 })
 export class WageRequest implements OnInit, OnDestroy {
@@ -25,6 +28,8 @@ export class WageRequest implements OnInit, OnDestroy {
   /** Current supportType from query param */
   supportType: SupportType = 'LIPW';
   statusMsg: string | null = null;
+  breadCrumbItems: any[] = [];
+  breadcrumbHome: any;
 
   private sub?: Subscription;
 
@@ -47,7 +52,6 @@ export class WageRequest implements OnInit, OnDestroy {
       payam: [''],
       bomaName: [''],
 
-      /** Keep supportType in the payload too */
       supportType: ['LIPW', Validators.required],
     });
   }
@@ -58,6 +62,9 @@ export class WageRequest implements OnInit, OnDestroy {
       const raw = (qp.get('supportType') || '').toUpperCase();
       const st = raw === 'DIS' ? 'DIS' : 'LIPW'; // default to LIPW if missing/invalid
       this.applySupportType(st);
+      this.breadcrumbHome = { icon: 'fas fa-home', routerLink: '/private' };
+      this.breadCrumbItems = [{ label: 'Wage Request' }];
+
     });
   }
 
