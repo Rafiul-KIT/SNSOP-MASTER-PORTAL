@@ -1,1 +1,252 @@
-now we can edit...
+<div class="breadcrumb-wrapper">
+    <p-breadcrumb class="max-w-full" [model]="items" [home]="home"></p-breadcrumb>
+</div>
+
+<div *ngIf="isLoading; else mainContent">
+    <p>Loading...</p>
+</div>
+
+<ng-template #mainContent>
+    <form [formGroup]="beneficiaryForm" (ngSubmit)="onSubmit()">
+        <p-tabView>
+            <!-- Tab 1: Personal Information -->
+            <p-tabPanel header="Personal Information">
+                <div style="height: calc(100vh - 210px); overflow-y: auto;">
+                    <div class="container user-form" style="padding-bottom: 100px;">
+                        <!-- Basic Information Section -->
+                        <div class="card mt-2">
+                            <h5 class="card-header">Basic Information</h5>
+                            <div class="card-body row g-3">
+                                <div class="col-md-3"><input class="form-control" placeholder="Respondent First Name"
+                                        formControlName="respondentFirstName"></div>
+                                <div class="col-md-3"><input class="form-control" placeholder="Respondent Middle Name"
+                                        formControlName="respondentMiddleName"></div>
+                                <div class="col-md-3"><input class="form-control" placeholder="Respondent Last Name"
+                                        formControlName="respondentLastName"></div>
+                                <div class="col-md-3"><input class="form-control" placeholder="Respondent Nick Name"
+                                        formControlName="respondentNickName"></div>
+                                <div class="col-md-3"><select class="form-select" formControlName="relationship">
+                                        <option value="">Select Relationship with household head</option>
+                                    </select></div>
+                                <div class="col-md-3"><input class="form-control" placeholder="Respondent Age"
+                                        formControlName="respondentAge"></div>
+                                <div class="col-md-3"><select class="form-select" formControlName="gender">
+                                        <option value="">Select Gender</option>
+                                    </select></div>
+                                <div class="col-md-3"><select class="form-select" formControlName="maritalStatus">
+                                        <option value="">Select Marital Status</option>
+                                    </select></div>
+                                <div class="col-md-3"><input class="form-control" placeholder="Spouse First Name"
+                                        formControlName="spouseFirstName"></div>
+                                <div class="col-md-3"><input class="form-control" placeholder="Spouse Middle Name"
+                                        formControlName="spouseMiddleName"></div>
+                                <div class="col-md-3"><input class="form-control" placeholder="Spouse Last Name"
+                                        formControlName="spouseLastName"></div>
+                                <div class="col-md-3"><select class="form-select" formControlName="legalStatus">
+                                        <option value="">Select Legal Status</option>
+                                    </select></div>
+                                <div class="col-md-3">
+                                    <label>Do you have a national ID?</label> <br>
+
+                                    <input class="form-check-input" type="radio" value="Yes"
+                                        formControlName="hasNationalId"> Yes
+                                    &NonBreakingSpace; &NonBreakingSpace;
+
+                                    <input class="form-check-input" type="radio" value="No"
+                                        formControlName="hasNationalId"> No
+
+                                </div>
+                                <div class="col-md-3"><select class="form-select" formControlName="idType">
+                                        <option value="">Select ID Number Type</option>
+                                    </select></div>
+                                <div class="col-md-3"><input class="form-control" placeholder="Respondent Id Number"
+                                        formControlName="respondentIdNumber"></div>
+                                <div class="col-md-3"><input class="form-control" placeholder="Phone Number"
+                                        formControlName="respondentPhone"></div>
+                            </div>
+                        </div>
+                        <div class="card mt-3">
+                            <h5 class="card-header">Selection Criteria</h5>
+                            <div class="card-body row g-3">
+                                <div class="col-md-4">
+                                    <select class="form-select" formControlName="mainIncomeSource">
+                                        <option value="">Select Household Main Source of Income</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4">
+                                    <input class="form-control"
+                                        placeholder="Could you specify the household main source of Income?"
+                                        formControlName="otherIncomeSource">
+                                </div>
+                                <div class="col-md-4">
+                                    <input class="form-control"
+                                        placeholder="Household Monthly Average Income (in Sudanese Pound)"
+                                        formControlName="avgMonthlyIncome">
+                                </div>
+                                <div class="col-md-4">
+                                    <label>Support Type</label><br>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" value="Public Works"
+                                            formControlName="supportType"> Public Works
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" value="Direct Income Support"
+                                            formControlName="supportType"> Direct Income Support
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Household Information Section -->
+                        <div class="card mt-3">
+                            <h5 class="card-header">Household Information</h5>
+                            <div class="card-body">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th rowspan="2">Age Group</th>
+                                            <th colspan="3">Male</th>
+                                            <th colspan="3">Female</th>
+                                        </tr>
+                                        <tr>
+                                            <th>Normal</th>
+                                            <th>With Disability</th>
+                                            <th>With Chronic Illness</th>
+                                            <th>Normal</th>
+                                            <th>With Disability</th>
+                                            <th>With Chronic Illness</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let ageGroup of ageGroups">
+                                            <td>{{ ageGroup.label }}</td>
+                                            <td><input class="form-control" [formControlName]="ageGroup.maleNormal">
+                                            </td>
+                                            <td><input class="form-control" [formControlName]="ageGroup.maleDisability">
+                                            </td>
+                                            <td><input class="form-control" [formControlName]="ageGroup.maleChronic">
+                                            </td>
+                                            <td><input class="form-control" [formControlName]="ageGroup.femaleNormal">
+                                            </td>
+                                            <td><input class="form-control"
+                                                    [formControlName]="ageGroup.femaleDisability"></td>
+                                            <td><input class="form-control" [formControlName]="ageGroup.femaleChronic">
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div class="row g-3 mt-2">
+                                    <div class="col-md-6">
+                                        <label>Do you read and write?</label><br>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" value="Yes"
+                                                formControlName="canReadWrite"> Yes
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" value="No"
+                                                formControlName="canReadWrite"> No
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input class="form-control"
+                                            placeholder="18-35 yr literate members (excluding yourself)"
+                                            formControlName="literate1835Count">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input class="form-control" placeholder="Household Size (including yourself)"
+                                            formControlName="householdSize">
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!-- [Keep your original 'Basic Information', 'Selection Criteria', and 'Household Info' sections here] -->
+                        <!-- Submit button can remain here OR moved outside the tabView if needed globally -->
+                        <div class="mt-3 d-flex justify-content-end">
+                            <button type="submit" class="btn btn-primary" [disabled]="beneficiaryForm.invalid">
+                                <i class="fas fa-save me-2"></i>Update
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+
+            </p-tabPanel>
+
+            <!-- Tab 2: Alternate Payee Information -->
+            <p-tabPanel header="Alternate Payee Information">
+                <div style="height: calc(100vh - 210px); overflow-y: auto;">
+                    <div class="container user-form">
+                        <div class="card mt-3">
+                            <h5 class="card-header">Alternate Payee Information</h5>
+                            <div class="card-body row">
+                                <!-- Alternate Payee One -->
+                                <div class="col-md-6">
+                                    <h6>Alternate Payee One</h6>
+                                    <input class="form-control mb-2" placeholder="Name" formControlName="alt1Name">
+                                    <select class="form-select mb-2" formControlName="alt1Gender">
+                                        <option value="">Select Gender</option>
+                                    </select>
+                                    <input class="form-control mb-2" placeholder="Age" formControlName="alt1Age">
+                                    <label>Do you have a national ID?</label><br>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" value="Yes"
+                                            formControlName="alt1HasNationalId"> Yes
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" value="No"
+                                            formControlName="alt1HasNationalId"> No
+                                    </div>
+                                    <select class="form-select mb-2" formControlName="alt1IdType">
+                                        <option value="">Select ID Number Type</option>
+                                    </select>
+                                    <input class="form-control mb-2" placeholder="Id Number"
+                                        formControlName="alt1IdNumber">
+                                    <input class="form-control mb-2" placeholder="Contact Number"
+                                        formControlName="alt1Phone">
+                                </div>
+
+                                <!-- Alternate Payee Two -->
+                                <div class="col-md-6">
+                                    <h6>Alternate Payee Two</h6>
+                                    <input class="form-control mb-2" placeholder="Name" formControlName="alt2Name">
+                                    <select class="form-select mb-2" formControlName="alt2Gender">
+                                        <option value="">Select Gender</option>
+                                    </select>
+                                    <input class="form-control mb-2" placeholder="Age" formControlName="alt2Age">
+                                    <label>Do you have a national ID?</label><br>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" value="Yes"
+                                            formControlName="alt2HasNationalId"> Yes
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" value="No"
+                                            formControlName="alt2HasNationalId"> No
+                                    </div>
+                                    <select class="form-select mb-2" formControlName="alt2IdType">
+                                        <option value="">Select ID Number Type</option>
+                                    </select>
+                                    <input class="form-control mb-2" placeholder="Id Number"
+                                        formControlName="alt2IdNumber">
+                                    <input class="form-control mb-2" placeholder="Contact Number"
+                                        formControlName="alt2Phone">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-3 d-flex justify-content-end">
+                            <button type="submit" class="btn btn-primary" [disabled]="beneficiaryForm.invalid">
+                                <i class="fas fa-save me-2"></i>Update
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </p-tabPanel>
+
+        </p-tabView>
+
+        <!-- Submit Button (outside tab view, if global for all tabs) -->
+
+
+    </form>
+</ng-template>

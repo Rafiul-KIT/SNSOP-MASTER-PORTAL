@@ -36,10 +36,10 @@ export class BeneficiaryDetails implements OnInit {
   breadcrumbItems: any[] = [];
   breadcrumbHome: any;
 
-  ngOnInit()  {
-      this.initializeDemoData();
-      this.isLoading = false;
-    
+  ngOnInit() {
+    this.initializeDemoData();
+    this.isLoading = false;
+
     this.breadcrumbHome = { icon: 'fas fa-home', routerLink: '/private' };
     this.breadcrumbItems = [{ label: 'Beneficiary Details' }];
   }
@@ -52,15 +52,21 @@ export class BeneficiaryDetails implements OnInit {
       gender: 'Male',
       phone: '123-456-7890',
       household: {
-        incomeSource: 'Farming',
-        monthlyIncome: '500 SSP',
-        selectionCriteria: 'LIPW',
-        selectionReasons: ['Youth-headed household', 'No fixed income'],
-        size: 5,
-        female: 2,
-        male: 3,
-        disability: 1,
-        chronicallyIll: 1,
+        incomeSource: 'Casual Labour',
+        monthlyIncome: 'SDG 6000',
+        selectionCriteria: 'Public Works',
+        selectionReasons: ['Household contain able bodied youth member (18–35)'],
+        size: 2,
+        female: 0,
+        male: 2,
+        chronicallyIll: 0,
+        disability: 0,
+        ageGroup_0_2: 0,
+        ageGroup_3_5: 0,
+        ageGroup_6_17: 0,
+        ageGroup_18_35: 2,
+        ageGroup_36_64: 0,
+        ageGroup_64_plus: 0,
         memberReadWrite: 2,
         isReadWrite: true
       },

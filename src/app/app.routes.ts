@@ -58,6 +58,7 @@ import { Register } from './pages/private/users/register/register';
 import { RoleManagement } from './pages/private/users/role-management/role-management';
 import { BeneficiaryDetails } from './pages/private/beneficiary/beneficiary-details/beneficiary-details';
 import { ReportBeneficiaryDetails } from './pages/private/report/report-beneficiary-details/report-beneficiary-details';
+import { BeneficiaryMigration } from './pages/private/beneficiary/beneficiary-migration/beneficiary-migration';
 
 export const routes: Routes = [
   {
@@ -104,6 +105,7 @@ export const routes: Routes = [
           { path: 'lipw-export', component: LipwExport },
           { path: 'edit/:bid', component: BeneficiaryManage },
           { path: 'details/:bid', component: BeneficiaryDetails },
+          { path: 'migration/:bid', component: BeneficiaryMigration },
           { path: '', pathMatch: 'full', redirectTo: 'list' },
         ],
       },

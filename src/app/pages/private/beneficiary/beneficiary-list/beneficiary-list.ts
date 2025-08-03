@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
-
-// ✅ PrimeNG modules
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { DropdownModule } from 'primeng/dropdown';
@@ -87,7 +85,7 @@ export class BeneficiaryList implements OnInit {
     this.initForm();
     this.loadLocations();
     this.loadBeneficiaries();
-    this.breadcrumbHome = { icon: 'fas fa-home', routerLink: '/private' };
+    this.breadcrumbHome = { icon: 'fas fa-home', routerLink: '/' };
     this.breadcrumbItems = [{ label: 'Beneficiary List' }];
   }
 
@@ -209,6 +207,19 @@ editBeneficiary(b: Beneficiary) {
   }
 
   this.router.navigate(['/private/beneficiary/edit', String(bid)]);
+
+}
+
+
+migrateBeneficiary(b: Beneficiary) {
+  const bid = b?.householdNumber;
+
+  if (!bid) {
+    console.error('Migrate clicked, but b.householdNumber is missing:', b);
+    return;
+  }
+
+  this.router.navigate(['/private/beneficiary/migration', String(bid)]);
 
 }
 
