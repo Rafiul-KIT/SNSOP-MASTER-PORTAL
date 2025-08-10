@@ -13,10 +13,12 @@
     <div class="fw-semibold">Apply for Wages Payment</div>
   </div>-->
 <br>
-  <div class="d-flex align-items-center justify-content-center gap-2 mb-3">
-    <span class="fw-semibold">Search :</span>
-    <p-button label="Look Up" icon="fas fa-search" severity="primary" (click)="onLookup()"></p-button>
-  </div>
+  <div *ngIf="supportType === 'LIPW'" class="d-flex align-items-center justify-content-center gap-2 mb-3">
+  <span  class="fw-semibold">Search :</span>
+  <!-- The "Look Up" button is only visible when supportType is 'LIPW' -->
+  <p-button label="Look Up" icon="fas fa-search" severity="primary" (click)="onLookup()"></p-button>
+</div>
+
   <div>
     <!-- Reactive form -->
     <form [formGroup]="form" class="container-fluid">

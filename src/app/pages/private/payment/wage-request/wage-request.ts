@@ -1,19 +1,18 @@
-// wage-request.component.ts
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import {Breadcrumb} from 'primeng/breadcrumb';
+import { Breadcrumb } from 'primeng/breadcrumb';
 import { BreadcrumbModule } from 'primeng/breadcrumb';
-import {Button} from 'primeng/button';
+import { Button } from 'primeng/button';
 
 type SupportType = 'LIPW' | 'DIS';
 
 @Component({
   selector: 'wage-request',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, Breadcrumb, Button],
+  imports: [CommonModule, ReactiveFormsModule, Breadcrumb, Button, BreadcrumbModule],
   templateUrl: './wage-request.html',
 })
 export class WageRequest implements OnInit, OnDestroy {
@@ -59,12 +58,13 @@ export class WageRequest implements OnInit, OnDestroy {
   ngOnInit(): void {
     // Subscribe to query param changes (works even when navigating between LIPW<->DIS on same path)
     this.sub = this.route.queryParamMap.subscribe((qp) => {
-      const raw = (qp.get('supportType') || '').toUpperCase();
-      const st = raw === 'DIS' ? 'DIS' : 'LIPW'; // default to LIPW if missing/invalid
+      const raw = (qp.get('program') || '').toUpperCase(); // Use 'program' as the query param name
+      const st = raw === 'DIS' ? 'DIS' : 'LIPW'; // Default to 'LIPW' if missing or invalid
       this.applySupportType(st);
+
+      // Breadcrumb setup
       this.breadcrumbHome = { icon: 'fas fa-home', routerLink: '/private' };
       this.breadCrumbItems = [{ label: 'Wage Request' }];
-
     });
   }
 
@@ -78,18 +78,15 @@ export class WageRequest implements OnInit, OnDestroy {
     this.form.patchValue({ supportType: st });
 
     // Example: tweak defaults or show/hide fields per type
-    // (You can put any conditional logic here)
     if (st === 'LIPW') {
-      // set defaults/toggles specific to LIPW
       this.statusMsg = 'LIPW mode';
     } else {
-      // set defaults/toggles specific to DIS
       this.statusMsg = 'DIS mode';
     }
   }
 
   onLookup(): void {
-    this.statusMsg = `Lookup clicked in ${this.supportType} mode.`;
+    this.router.navigate(['/private/payment/lookup-sub-project']);
   }
 
   onSearch(): void {
@@ -107,17 +104,17 @@ export class WageRequest implements OnInit, OnDestroy {
   onCancel(): void {
     this.form.reset({
       paymentCycle: 1,
-      supportType: this.supportType, // keep current mode after reset
+      supportType: this.supportType, // Keep current mode after reset
     });
     this.statusMsg = 'Form cleared.';
   }
 
-  /** Optional: switch within the component (e.g., tabs/toggle) and update URL */
+  /** Optional: switch support type within the component (e.g., tabs/toggle) and update URL */
   switchSupportType(st: SupportType): void {
     this.router.navigate([], {
       relativeTo: this.route,
-      queryParams: { supportType: st },
-      queryParamsHandling: 'merge', // keep other params if any
+      queryParams: { program: st }, // Update query parameter in URL
+      queryParamsHandling: 'merge', // Keep other params if any
     });
   }
 }
