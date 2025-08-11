@@ -1,1 +1,135 @@
-<p>wage-request works!</p>
+<!-- wage-request.component.html -->
+
+<!-- “Breadcrumb” line (simple text version) -->
+<div class="breadcrumb-wrapper mb-3">
+  <p-breadcrumb [model]="breadCrumbItems" [home]="breadcrumbHome" class="max-w-full">
+  </p-breadcrumb>
+
+</div>
+
+<!-- Outer panel -->
+<div class="card shadow-sm">
+  <!--<div class="card-header text-center position-relative">
+    <div class="fw-semibold">Apply for Wages Payment</div>
+  </div>-->
+<br>
+  <div *ngIf="supportType === 'LIPW'" class="d-flex align-items-center justify-content-center gap-2 mb-3">
+  <span  class="fw-semibold">Search :</span>
+  <!-- The "Look Up" button is only visible when supportType is 'LIPW' -->
+  <p-button label="Look Up" icon="fas fa-search" severity="primary" (click)="onLookup()"></p-button>
+</div>
+
+  <div>
+    <!-- Reactive form -->
+    <form [formGroup]="form" class="container-fluid">
+      <div class="row g-3 justify-content-center">
+        <!-- Left column -->
+        <div class="col-12 col-lg-6">
+          <div class="row align-items-center mb-2">
+            <label class="col-5 col-md-4 col-form-label">Project Name</label>
+            <div class="col-auto">:</div>
+            <div class="col">
+              <input class="form-control" formControlName="projectName" />
+            </div>
+          </div>
+
+          <div class="row align-items-center mb-2">
+            <label class="col-5 col-md-4 col-form-label">Work Code</label>
+            <div class="col-auto">:</div>
+            <div class="col">
+              <input class="form-control" formControlName="workCode" />
+            </div>
+          </div>
+
+          <div class="row align-items-center mb-2">
+            <label class="col-5 col-md-4 col-form-label">Approved Date</label>
+            <div class="col-auto">:</div>
+            <div class="col">
+              <input type="date" class="form-control" formControlName="approvedDate" />
+            </div>
+          </div>
+
+          <div class="row align-items-center mb-2">
+            <label class="col-5 col-md-4 col-form-label">Wage Rate (USD)</label>
+            <div class="col-auto">:</div>
+            <div class="col">
+              <input type="number" class="form-control" formControlName="wageRateUsd" />
+            </div>
+          </div>
+
+          <div class="row align-items-center mb-2">
+            <label class="col-5 col-md-4 col-form-label">From Date</label>
+            <div class="col-auto">:</div>
+            <div class="col">
+              <input type="date" class="form-control" formControlName="fromDate" />
+            </div>
+          </div>
+
+          <div class="row align-items-center mb-2">
+            <label class="col-5 col-md-4 col-form-label">To Date</label>
+            <div class="col-auto">:</div>
+            <div class="col">
+              <input type="date" class="form-control" formControlName="toDate" />
+            </div>
+          </div>
+
+          <div class="row align-items-center mb-2">
+            <label class="col-5 col-md-4 col-form-label">Payment Cycle</label>
+            <div class="col-auto">:</div>
+            <div class="col">
+              <select class="form-select" formControlName="paymentCycle">
+                <option *ngFor="let pc of paymentCycles" [value]="pc.value">{{ pc.label }}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right column -->
+        <div class="col-12 col-lg-6">
+          <div class="row align-items-center mb-2">
+            <label class="col-5 col-md-4 col-form-label">State</label>
+            <div class="col-auto">:</div>
+            <div class="col">
+              <input class="form-control" formControlName="state" />
+            </div>
+          </div>
+
+          <div class="row align-items-center mb-2">
+            <label class="col-5 col-md-4 col-form-label">County</label>
+            <div class="col-auto">:</div>
+            <div class="col">
+              <input class="form-control" formControlName="county" />
+            </div>
+          </div>
+
+          <div class="row align-items-center mb-2">
+            <label class="col-5 col-md-4 col-form-label">Payam</label>
+            <div class="col-auto">:</div>
+            <div class="col">
+              <input class="form-control" formControlName="payam" />
+            </div>
+          </div>
+
+          <div class="row align-items-center mb-2">
+            <label class="col-5 col-md-4 col-form-label">Boma Name</label>
+            <div class="col-auto">:</div>
+            <div class="col">
+              <input class="form-control" formControlName="bomaName" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Actions -->
+      <div class="d-flex justify-content-center gap-2 mt-4">
+        <p-button label = "Search" icon = "fas fa-search" severity="primary" (onClick)="onSearch()"></p-button>
+        <p-button label = "Cancel" icon = "fas fa-cancel" severity="secondary" (onClick)="onCancel()"></p-button>
+      </div>
+
+      <!-- Status line -->
+      <div *ngIf="statusMsg" class="text-center mt-3 small text-muted">
+        {{ statusMsg }}
+      </div>
+    </form>
+  </div>
+</div>

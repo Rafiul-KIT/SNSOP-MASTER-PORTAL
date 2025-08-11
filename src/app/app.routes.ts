@@ -59,6 +59,7 @@ import { RoleManagement } from './pages/private/users/role-management/role-manag
 import { BeneficiaryDetails } from './pages/private/beneficiary/beneficiary-details/beneficiary-details';
 import { ReportBeneficiaryDetails } from './pages/private/report/report-beneficiary-details/report-beneficiary-details';
 import { BeneficiaryMigration } from './pages/private/beneficiary/beneficiary-migration/beneficiary-migration';
+import { LookupSubProject } from './pages/private/payment/lookup-sub-project/lookup-sub-project';
 
 export const routes: Routes = [
   {
@@ -119,6 +120,7 @@ export const routes: Routes = [
           { path: 'supplementary-payroll', component: SupplementaryPayroll },
           { path: 'mobile-wallet-payroll', component: MobileWalletPayroll },
           { path: 'payroll-reconcile', component: PayrollReconcile },
+          { path: 'lookup-sub-project', component: LookupSubProject },
           { path: '', pathMatch: 'full', redirectTo: 'create-wage-request' },
         ],
       },

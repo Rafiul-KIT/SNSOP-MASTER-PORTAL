@@ -115,7 +115,20 @@ export class Sidemenu implements OnInit {
           {
             label: 'Creating Wage Request',
             icon: 'fas fa-plus',
-            routerLink: 'payment/create-wage-request',
+            items: [
+              {
+                label: 'LIPW',
+                icon: 'fas fa-list',
+                routerLink: 'payment/create-wage-request',
+                queryParams: { program: 'lipw' }
+              },
+              {
+                label: 'DIS',
+                icon: 'fas fa-list',
+                routerLink: 'payment/create-wage-request',
+                queryParams: { program: 'dis' }
+              }
+            ],
           },
           {
             label: 'Creating Payroll',
