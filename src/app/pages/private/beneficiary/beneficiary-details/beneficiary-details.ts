@@ -24,6 +24,9 @@ import { ScrollPanelModule } from 'primeng/scrollpanel';
   ]
 })
 export class BeneficiaryDetails implements OnInit {
+
+  approvalComment: string = '';
+  isSubmitting = false;
   isLoading = true;
   beneficiaryPhoto = 'images/dummyHuman.jpg';
   alternate1Photo = 'images/dummyHuman.jpg';
@@ -111,4 +114,23 @@ export class BeneficiaryDetails implements OnInit {
       { label: 'Little', image: 'images/tick.jpg', tooltip: 'Left Little' }
     ];
   }
+  onApprove(comment: string) {
+  this.isSubmitting = true;
+  try {
+    // TODO: call your service/API to approve
+    // this.approvalService.approve(this.beneficiaryDetails.applicationId, comment)...
+  } finally {
+    this.isSubmitting = false;
+  }
+}
+
+onReject(comment: string) {
+  this.isSubmitting = true;
+  try {
+    // TODO: call your service/API to reject
+    // this.approvalService.reject(this.beneficiaryDetails.applicationId, comment)...
+  } finally {
+    this.isSubmitting = false;
+  }
+}
 }

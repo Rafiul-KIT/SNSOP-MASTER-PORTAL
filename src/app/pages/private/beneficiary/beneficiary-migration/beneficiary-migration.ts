@@ -22,6 +22,7 @@ import { InputTextModule } from 'primeng/inputtext';
   styleUrl: './beneficiary-migration.scss'
 })
 export class BeneficiaryMigration {
+  isSubmitting = false;
   isLoading = false;
   items = [
     { label: 'Beneficiary List', icon: 'fas fa-users me-2', routerLink: '/private/beneficiary/list' },
@@ -51,6 +52,7 @@ beneficiaryPhoto = 'images/dummyHuman.jpg';
       boma: [''],
       gpsLat: [''],
       gpsLong: [''],
+      approvalComment: ['']
     });
 
   }
@@ -82,5 +84,27 @@ beneficiaryPhoto = 'images/dummyHuman.jpg';
       alert('Please fill out all required fields.');
     }
   }
+
+  onApprove() {
+  this.isSubmitting = true;
+  const comment = this.beneficiaryForm.get('approvalComment')?.value ?? '';
+  try {
+    // TODO: call Approve API with comment + IDs you need
+    // this.service.approve(this.beneficiaryDetails.applicationId, comment).subscribe(...)
+  } finally {
+    this.isSubmitting = false;
+  }
+}
+
+onReject() {
+  this.isSubmitting = true;
+  const comment = this.beneficiaryForm.get('approvalComment')?.value ?? '';
+  try {
+    // TODO: call Reject API with comment + IDs you need
+    // this.service.reject(this.beneficiaryDetails.applicationId, comment).subscribe(...)
+  } finally {
+    this.isSubmitting = false;
+  }
+}
 
 }

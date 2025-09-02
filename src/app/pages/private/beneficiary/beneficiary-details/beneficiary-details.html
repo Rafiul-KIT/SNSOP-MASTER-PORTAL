@@ -194,123 +194,123 @@
                   </table>
                 </div>
               </div>
-              </p-accordionTab>
+            </p-accordionTab>
 
 
-              <!-- Address Information -->
-              <p-accordionTab header="Address Information">
-                <div class="card shadow-sm rounded">
-                  <div class="card-body">
-                    <table class="table table-sm table-bordered mb-0">
-                      <tbody>
-                        <tr>
-                          <th style="width: 180px;">State</th>
-                          <td>{{ beneficiaryDetails.address?.state || '-' }}</td>
-                        </tr>
-                        <tr>
-                          <th>County</th>
-                          <td>{{ beneficiaryDetails.address?.county || '-' }}</td>
-                        </tr>
-                        <tr>
-                          <th>Payam</th>
-                          <td>{{ beneficiaryDetails.address?.payam || '-' }}</td>
-                        </tr>
-                        <tr>
-                          <th>Boma</th>
-                          <td>{{ beneficiaryDetails.address?.boma || '-' }}</td>
-                        </tr>
-                        <tr>
-                          <th>Latitude</th>
-                          <td>{{ beneficiaryDetails.address?.lat || '-' }}</td>
-                        </tr>
-                        <tr>
-                          <th>Longitude</th>
-                          <td>{{ beneficiaryDetails.address?.lon || '-' }}</td>
-                        </tr>
-                      </tbody>
-                    </table>
+            <!-- Address Information -->
+            <p-accordionTab header="Address Information">
+              <div class="card shadow-sm rounded">
+                <div class="card-body">
+                  <table class="table table-sm table-bordered mb-0">
+                    <tbody>
+                      <tr>
+                        <th style="width: 180px;">State</th>
+                        <td>{{ beneficiaryDetails.address?.state || '-' }}</td>
+                      </tr>
+                      <tr>
+                        <th>County</th>
+                        <td>{{ beneficiaryDetails.address?.county || '-' }}</td>
+                      </tr>
+                      <tr>
+                        <th>Payam</th>
+                        <td>{{ beneficiaryDetails.address?.payam || '-' }}</td>
+                      </tr>
+                      <tr>
+                        <th>Boma</th>
+                        <td>{{ beneficiaryDetails.address?.boma || '-' }}</td>
+                      </tr>
+                      <tr>
+                        <th>Latitude</th>
+                        <td>{{ beneficiaryDetails.address?.lat || '-' }}</td>
+                      </tr>
+                      <tr>
+                        <th>Longitude</th>
+                        <td>{{ beneficiaryDetails.address?.lon || '-' }}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </p-accordionTab>
+
+            <!-- Alternate Payee Information -->
+            <p-accordionTab header="Alternate Information">
+              <div class="row g-3">
+                <div class="col-12" *ngIf="!beneficiaryDetails.alternatePayees?.length">
+                  <div class="alert alert-gray text-center mb-0">
+                    No Alternate Payee Information Provided
                   </div>
                 </div>
-              </p-accordionTab>
 
-              <!-- Alternate Payee Information -->
-              <p-accordionTab header="Alternate Information">
-                <div class="row g-3">
-                  <div class="col-12" *ngIf="!beneficiaryDetails.alternatePayees?.length">
-                    <div class="alert alert-gray text-center mb-0">
-                      No Alternate Payee Information Provided
+                <div class="col-12 col-md-6" *ngFor="let alt of beneficiaryDetails.alternatePayees; let i = index">
+                  <div class="card shadow-sm rounded h-100">
+                    <div class="card-header bg-gray text-black text-center">
+                      Alternate {{ i + 1 }}
                     </div>
-                  </div>
+                    <div class="card-body text-center">
+                      <img [src]="alternate1Photo" class="img-thumbnail mb-3" height="80" />
 
-                  <div class="col-12 col-md-6" *ngFor="let alt of beneficiaryDetails.alternatePayees; let i = index">
-                    <div class="card shadow-sm rounded h-100">
-                      <div class="card-header bg-gray text-black text-center">
-                        Alternate {{ i + 1 }}
-                      </div>
-                      <div class="card-body text-center">
-                        <img [src]="alternate1Photo" class="img-thumbnail mb-3" height="80" />
-
-                        <!-- Fingerprints (uses common TS arrays) -->
-                        <div class="table-responsive mb-3">
-                          <table class="table table-bordered text-center">
-                            <tbody>
-                              <tr>
-                                <th colspan="5">Right Hand Finger</th>
-                              </tr>
-                              <tr>
-                                <td *ngFor="let f of rightFingers">
-                                  <img [pTooltip]="f.tooltip" tooltipPosition="top" [src]="f.image" height="40" />
-                                  <br /><kbd>{{ f.label }}</kbd>
-                                </td>
-                              </tr>
-
-                              <tr>
-                                <th colspan="5">Left Hand Finger</th>
-                              </tr>
-                              <tr>
-                                <td *ngFor="let f of leftFingers">
-                                  <img [pTooltip]="f.tooltip" tooltipPosition="top" [src]="f.image" height="40" />
-                                  <br /><kbd>{{ f.label }}</kbd>
-                                </td>
-                              </tr>
-                            </tbody>
-                          </table>
-                        </div>
-
-                        <!-- Alternate Info Table -->
-                        <table class="table table-sm table-bordered text-start mb-0">
+                      <!-- Fingerprints (uses common TS arrays) -->
+                      <div class="table-responsive mb-3">
+                        <table class="table table-bordered text-center">
                           <tbody>
                             <tr>
-                              <th style="width: 160px">Name</th>
-                              <td>{{ alt.name || '-' }}</td>
+                              <th colspan="5">Right Hand Finger</th>
                             </tr>
                             <tr>
-                              <th>Age</th>
-                              <td>{{ alt.age ?? '-' }}</td>
+                              <td *ngFor="let f of rightFingers">
+                                <img [pTooltip]="f.tooltip" tooltipPosition="top" [src]="f.image" height="40" />
+                                <br /><kbd>{{ f.label }}</kbd>
+                              </td>
+                            </tr>
+
+                            <tr>
+                              <th colspan="5">Left Hand Finger</th>
                             </tr>
                             <tr>
-                              <th>Gender</th>
-                              <td>{{ alt.gender || '-' }}</td>
-                            </tr>
-                            <tr>
-                              <th>ID</th>
-                              <td>{{ alt.nationalId || '-' }}</td>
-                            </tr>
-                            <tr>
-                              <th>Document Type</th>
-                              <td>{{ alt.documentType || '-' }}</td>
-                            </tr>
-                            <tr>
-                              <th>Phone</th>
-                              <td>{{ alt.phone || '-' }}</td>
+                              <td *ngFor="let f of leftFingers">
+                                <img [pTooltip]="f.tooltip" tooltipPosition="top" [src]="f.image" height="40" />
+                                <br /><kbd>{{ f.label }}</kbd>
+                              </td>
                             </tr>
                           </tbody>
                         </table>
                       </div>
+
+                      <!-- Alternate Info Table -->
+                      <table class="table table-sm table-bordered text-start mb-0">
+                        <tbody>
+                          <tr>
+                            <th style="width: 160px">Name</th>
+                            <td>{{ alt.name || '-' }}</td>
+                          </tr>
+                          <tr>
+                            <th>Age</th>
+                            <td>{{ alt.age ?? '-' }}</td>
+                          </tr>
+                          <tr>
+                            <th>Gender</th>
+                            <td>{{ alt.gender || '-' }}</td>
+                          </tr>
+                          <tr>
+                            <th>ID</th>
+                            <td>{{ alt.nationalId || '-' }}</td>
+                          </tr>
+                          <tr>
+                            <th>Document Type</th>
+                            <td>{{ alt.documentType || '-' }}</td>
+                          </tr>
+                          <tr>
+                            <th>Phone</th>
+                            <td>{{ alt.phone || '-' }}</td>
+                          </tr>
+                        </tbody>
+                      </table>
                     </div>
                   </div>
                 </div>
-              </p-accordionTab>
+              </div>
+            </p-accordionTab>
 
 
 
@@ -358,5 +358,30 @@
       </p-tabPanel>
 
     </p-tabView>
+    <!-- ===== Actions: Comment + Approve/Reject ===== -->
+    <hr class="my-4" />
+
+    <div class="card shadow-sm rounded">
+      <div class="card-header bg-gray text-black">Approval Comment</div>
+      <div class="card-body">
+        <div class="mb-3">
+          <label for="approvalComment" class="form-label">Comment (optional)</label>
+          <textarea class="form-control" rows="4" (input)="approvalComment = $any($event.target).value"></textarea>
+        </div>
+
+        <div class="d-flex gap-2 justify-content-end">
+          <button type="button" class="btn btn-outline-danger" (click)="onReject(approvalComment)"
+            [disabled]="isLoading || isSubmitting">
+            Reject
+          </button>
+
+          <button type="button" class="btn btn-success" (click)="onApprove(approvalComment)"
+            [disabled]="isLoading || isSubmitting">
+            Approve
+          </button>
+        </div>
+      </div>
+    </div>
+
   </div>
 </ng-template>
