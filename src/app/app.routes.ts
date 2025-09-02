@@ -60,6 +60,9 @@ import { BeneficiaryDetails } from './pages/private/beneficiary/beneficiary-deta
 import { ReportBeneficiaryDetails } from './pages/private/report/report-beneficiary-details/report-beneficiary-details';
 import { BeneficiaryMigration } from './pages/private/beneficiary/beneficiary-migration/beneficiary-migration';
 import { LookupSubProject } from './pages/private/payment/lookup-sub-project/lookup-sub-project';
+import { BeneficiaryEditApproval } from './pages/private/approval/beneficiary-edit-approval/beneficiary-edit-approval';
+import { BeneficiaryMigrateApproval } from './pages/private/approval/beneficiary-migrate-approval/beneficiary-migrate-approval';
+import { BeneficiaryArchiveApproval } from './pages/private/approval/beneficiary-archive-approval/beneficiary-archive-approval';
 
 export const routes: Routes = [
   {
@@ -188,6 +191,15 @@ export const routes: Routes = [
         ],
       },
       { path: '', pathMatch: 'full', redirectTo: 'dashboard' },
+      {
+        path: 'approval',
+        children: [
+          { path: 'beneficiary-edit-approval', component: BeneficiaryEditApproval },
+          { path: 'beneficiary-migrate-approval', component: BeneficiaryMigrateApproval },
+          { path: 'beneficiary-archive-approval', component: BeneficiaryArchiveApproval },
+          { path: '', pathMatch: 'full', redirectTo: 'beneficiary-edit-approval' },
+        ],
+      },
     ],
   },
 

@@ -32,37 +32,6 @@ export class Sidemenu implements OnInit {
         items: [],
       },
       {
-        label: 'Settings',
-        icon: 'fas fa-screwdriver-wrench',
-        items: [
-          {
-            label: 'GEO Location',
-            icon: 'fas fa-globe',
-            routerLink: 'settings/geo-location',
-          },
-          {
-            label: 'Implementation Partners',
-            icon: 'fas fa-users',
-            routerLink: 'settings/partners',
-          },
-          {
-            label: 'Creating Project',
-            icon: 'fas fa-folder',
-            routerLink: 'settings/create-project',
-          },
-          {
-            label: 'Creating Sub Project',
-            icon: 'fas fa-file',
-            routerLink: 'settings/sub-project',
-          },
-          {
-            label: 'Creating Payment Cycle',
-            icon: 'fas fa-money-check-dollar',
-            routerLink: 'settings/create-payment-cycle',
-          },
-        ],
-      },
-      {
         label: 'Beneficiary Management',
         icon: 'fas fa-cogs',
         items: [
@@ -326,6 +295,27 @@ export class Sidemenu implements OnInit {
         items: [],
       },
       {
+        label: 'Approval',
+        icon: 'fas fa-square-check',
+        items: [
+          {
+            label: 'Beneficiary Edit',
+            icon: 'fas fa-user-pen',
+            routerLink: 'approval/beneficiary-edit-approval',
+          },
+          {
+            label: 'Beneficiary Migrate',
+            icon: 'fas fa-share',
+            routerLink: 'approval/beneficiary-migrate-approval',
+          },
+          {
+            label: 'Beneficiary Archive',
+            icon: 'fas fa-archive',
+            routerLink: 'approval/beneficiary-archive-approval',
+          },
+        ],
+      },
+      {
         label: 'User Management',
         icon: 'fas fa-users-cog',
         items: [
@@ -343,6 +333,37 @@ export class Sidemenu implements OnInit {
             label: 'User List',
             icon: 'fas fa-users',
             routerLink: 'user/list',
+          },
+        ],
+      },
+      {
+        label: 'Settings',
+        icon: 'fas fa-screwdriver-wrench',
+        items: [
+          {
+            label: 'GEO Location',
+            icon: 'fas fa-globe',
+            routerLink: 'settings/geo-location',
+          },
+          {
+            label: 'Implementation Partners',
+            icon: 'fas fa-users',
+            routerLink: 'settings/partners',
+          },
+          {
+            label: 'Creating Project',
+            icon: 'fas fa-folder',
+            routerLink: 'settings/create-project',
+          },
+          {
+            label: 'Creating Sub Project',
+            icon: 'fas fa-file',
+            routerLink: 'settings/sub-project',
+          },
+          {
+            label: 'Creating Payment Cycle',
+            icon: 'fas fa-money-check-dollar',
+            routerLink: 'settings/create-payment-cycle',
           },
         ],
       },
