@@ -86,7 +86,7 @@ export class BeneficiaryMigrateApproval implements OnInit {
     this.loadLocations();
     this.loadBeneficiaries();
     this.breadcrumbHome = { icon: 'fas fa-home', routerLink: '/' };
-    this.breadcrumbItems = [{ label: 'Beneficiary List' }];
+    this.breadcrumbItems = [{ label: 'Beneficiary Migrate' }];
   }
 
   initForm() {
